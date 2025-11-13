@@ -1,5 +1,9 @@
 import pytest
-from to_do_list.task_manager import TaskManager
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+
+from to_do_list.task import TaskManager
 
 @pytest.fixture
 def manager():
