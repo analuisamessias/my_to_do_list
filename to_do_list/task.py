@@ -33,3 +33,13 @@ class TaskManager:
     def limpar_tarefas_concluidas(self):
         self.tarefas = [t for t in self.tarefas if not t["concluída"]]
         return self.tarefas
+    
+    def editar_tarefa(self, id_tarefa, nova_desc):
+        if not nova_desc or not nova_desc.strip():
+            raise ValueError("Nova descrição inválida.")
+
+        for t in self.tarefas:
+            if t["id"] == id_tarefa:
+                t["descricao"] = nova_desc.strip()
+                return t
+        raise ValueError("Tarefa não encontrada.")

@@ -64,3 +64,8 @@ def test_remover_inexistente(manager):
     with pytest.raises(ValueError):
         manager.remover_tarefa(99)
 
+def test_editar_tarefa(manager):
+    t = manager.adicionar_tarefa("Tarefa antiga de teste")
+    editada = manager.editar_tarefa(t["id"], "Tarefa nova de teste")
+    assert editada["descricao"] == "Tarefa nova de teste"
+
