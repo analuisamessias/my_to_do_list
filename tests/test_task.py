@@ -45,3 +45,22 @@ def test_listar_tarefas_filtradas(manager):
     pendentes = manager.listar_tarefas(apenas_concluidas=False)
     assert len(concluidas) == 1
     assert len(pendentes) == 1
+  
+def test_ids_incrementam(manager):
+    t1 = manager.adicionar_tarefa("Aula prática 4")
+    t2 = manager.adicionar_tarefa("Aula prática 5")
+    assert t2["id"] == t1["id"] + 1
+
+def test_listar_tarefas_concluidas(manager):
+    manager.adicionar_tarefa("Aula prática 4")
+    t = manager.adicionar_tarefa("Aula prática 5")
+    manager.concluir_tarefa(t["id"])
+    concluidas = manager.listar_tarefas(apenas_concluidas=True)
+    assert len(concluidas) == 1
+    assert concluidas[0]["descricao"] == "Aula prática 5"
+
+def test_remover_inexistente(manager):
+    manager.adicionar_tarefa("Aula prática 4")
+    with pytest.raises(ValueError):
+        manager.remover_tarefa(99)
+
