@@ -69,3 +69,8 @@ def test_editar_tarefa(manager):
     editada = manager.editar_tarefa(t["id"], "Tarefa nova de teste")
     assert editada["descricao"] == "Tarefa nova de teste"
 
+def test_limpar_sem_tarefas_concluidas(manager):
+    manager.adicionar_tarefa("Aula prática 4")
+    manager.adicionar_tarefa("Aula prática 5")
+    resultado = manager.limpar_tarefas_concluidas()
+    assert len(resultado) == 2 
